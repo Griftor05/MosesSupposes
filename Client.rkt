@@ -2,7 +2,6 @@
 ;; about the language level of this file in a form that our tools can easily process.
 #reader(lib "htdp-beginner-abbr-reader.ss" "lang")((modname Client) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ())))
 (require picturing-programs)
-(define-struct msg (x b))
 (define (back-space x)
   (cond
     [(or (empty? (string->list x)) (empty? (rest (string->list x)))) ""]
@@ -23,8 +22,8 @@
 (define (drawer x)
   (cond [(string? x) (overlay/align "left" "center" (text x 15 "black") (rectangle 900 12 "solid" "white"))]
         [else (make-board x (recatangle 900 900 "solid" "white") 12)]))
-(define (receiver x)
-  x)
+;(define (receiver x)
+ ; x)
 (define (make-board x y z)
   (cond [(empty? x) empty]
         [else (make-board (rest (rest x)) 
@@ -33,7 +32,7 @@
   
 (big-bang ""
           (name "runner")
-          (on-receive receiver)
+          ;(on-receive receiver)
           (on-tick ticker)
           (on-key keyer)
           (on-draw drawer))
